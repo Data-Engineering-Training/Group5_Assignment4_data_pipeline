@@ -1,0 +1,90 @@
+1. Get the total number of customers for each company:
+
+	SELECT COUNT(*) AS total_customers
+	FROM company_data;
+
+
+
+2. Get the average transaction amount for each company:
+
+	SELECT AVG(transaction_amount) AS avg_transaction_amount
+	FROM company_data;
+
+
+
+
+3. Get the top 10 customers with the highest transaction amounts:
+
+
+	SELECT name, transaction_amount
+	FROM company_data
+	ORDER BY transaction_amount DESC
+	LIMIT 10;
+
+
+
+4. Get the number of customers who prefer the app vs. the website:
+
+	SELECT preference, COUNT(*) AS customer_count
+	FROM company_data
+	GROUP BY preference;
+
+
+
+5. Get the customers who have made transactions above a certain amount (e.g., $500):
+
+	SELECT name, address, transaction_amount
+	FROM company_data
+	WHERE transaction_amount > 500;
+
+
+
+
+6. Get the customers grouped by their location (city or state):
+
+	SELECT SUBSTRING(address, '(.+?),') AS location, COUNT(*) AS customer_count
+	FROM company_data
+	GROUP BY location
+
+
+
+
+7. Determine if there is a correlation between preferred communication method (email/phone) and customer preferences (app/website)
+
+	SELECT communication_methods, customer_preferences, COUNT(*) AS count
+	FROM company_data
+	GROUP BY communication_methods, customer_preferences
+	ORDER BY count DESC;
+
+
+
+
+8. Get the customer with the highest total transaction amount
+
+	SELECT name, SUM(transaction_amount) AS total_spent
+	FROM company_data
+	GROUP BY name
+	ORDER BY total_spent DESC
+	LIMIT 1;
+
+
+
+
+9. Find customers who havent made any transactions
+
+	SELECT name
+	FROM company_data
+	WHERE transaction_amount = 0;
+
+
+
+
+10. How many customers prefer app over website
+	
+	SELECT COUNT(*) AS app_users
+	FROM company_data
+	WHERE customer_preferences = 'app';
+
+
+
+
